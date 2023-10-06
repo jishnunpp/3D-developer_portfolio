@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { Tilt } from 'react-tilt';
 import {motion} from 'framer-motion';
 import { styles } from '../styles';
@@ -7,7 +7,7 @@ import {fadeIn,textVariant} from '../utils/motion';
 import PropTypes from 'prop-types'
  import { SectionWrapper } from '../hoc';
 
- const ServiceCard = ({ index, title, }) => (
+ const ServiceCard = ({ index, title,icon }) => (
   <Tilt className='xs:w-[250px] w-full'>
     <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
@@ -22,7 +22,7 @@ import PropTypes from 'prop-types'
         className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
       >
         <img
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHp8Snj-TPFj7VFI0Lp3_VLLRSzSVw9qIgSg&usqp=CAU'
+          src={icon}
           alt='web-development'
           className='w-16 h-16 object-contain'
         />
@@ -55,11 +55,9 @@ const About = () => {
       </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>
-      <ServiceCard title='web developer '/>
-      <ServiceCard title='React Native Developer'/>
-      <ServiceCard title='Backend Developer'/>
-      <ServiceCard title='content creater'/>
-
+        {services.map((service, index) => (
+          <ServiceCard key={service.title} index={index} {...service} />
+        ))}
       </div>
     </>
   );
